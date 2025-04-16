@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Subject</title><link rel="icon" href="images/TeS.png">
+  <title>Abilities</title><link rel="icon" href="images/TeS.png">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -62,6 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="customStyles.css">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -77,8 +78,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Subject
-        <small>Subject Details</small>
+      Abilities
+        <small>Details</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Subject</a></li>

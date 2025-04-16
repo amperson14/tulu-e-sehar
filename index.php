@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             ?>
 
-              <p>Disablities</p>
+              <p>Ablities</p>
             </div>
             <div class="icon">
               <i class="fa fa-book"></i>
@@ -342,13 +342,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Disablities Div -->
 <div id="disablityDiv" style="display: none;">
   <div class="box-header with-border">
-    <h3 class="box-title">Disablities Details</h3>
+    <h3 class="box-title">Details</h3>
   </div>
   <div class="box-body">
   <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Disablities</th>
+                  <th>Ablities</th>
                   <th>Number of Students</th>
                   <!-- <th>Details</th> -->
                   <!-- <th>Action</th> -->
@@ -390,13 +390,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Parent ID</th>
-                  <th>Full Name</th>
-                  <th>NIC</th>
-                  <th>Gender</th>
+                  <th>Total Parents</th>
+                  <th>No. Serving Parents</th>
+                  <th>No. Civil Parents</th>
+                  
+                  <!-- <th>Gender</th>
                   <th>Address</th>
                   <th>Contact</th>
-                  <th>Occupation</th>
+                  <th>Occupation</th> -->
                   <!-- <th>Actions</th> -->
                   
                 </tr>
@@ -409,12 +410,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   $sql = "SELECT * FROM parent";
                   $result = $conn->query($sql);
 
+                  // if ($result->num_rows > 0) {
+                  //  // output data of each row
+                  //    while($row = $result->fetch_assoc()) {
+                  //     echo "<tr><td> " . $row["pid"]. " </td><td> " . $row["fname"]." ". $row["lname"]. " </td><td> " . $row["nic"]. "</td><td>" . $row["gender"]. "</td><td>" . $row["address"]. "</td><td>" . $row["contact"]. "</td><td>" . $row["job"]. "</td></tr>";
+                  //      }
+                  //                 }
+
                   if ($result->num_rows > 0) {
-                   // output data of each row
-                     while($row = $result->fetch_assoc()) {
-                      echo "<tr><td> " . $row["pid"]. " </td><td> " . $row["fname"]." ". $row["lname"]. " </td><td> " . $row["nic"]. "</td><td>" . $row["gender"]. "</td><td>" . $row["address"]. "</td><td>" . $row["contact"]. "</td><td>" . $row["job"]. "</td></tr>";
-                       }
-                                  }
+                    // output data of each row
+                      while($row = $result->fetch_assoc()) {
+                       echo "<tr>
+                              <td> 50 </td>
+                              <td> 22 </td>
+                              <td> 28 </td>
+                            </tr>";
+                        }
+                                   }
 
                   ?>
 
