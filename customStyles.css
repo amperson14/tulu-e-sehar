@@ -1,0 +1,38 @@
+.modal-header {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.modal-title { 
+    width: 100% !important;
+}
+
+.modal-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-image img {
+    width: 150px;
+    height: auto;
+}
+
+.main-header .logo .logo-lg {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo-lg img {
+    width: 32px;
+    height: 32px;
+}
+
+.logo-lg b {
+    margin-left: 10px;
+}
+
+.logo-mini img {
+    width: 28px;
+    height: 28px;
+}
