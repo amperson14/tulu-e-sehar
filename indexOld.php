@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 if ($result->num_rows > 0) {
                   // output data of each row
                   while ($row = $result->fetch_assoc()) {
-                    echo "<h3>20</h3>";
+                    echo "<h3>" . $row['a'] . "</h3>";
                   }
                 }
 
@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 if ($result->num_rows > 0) {
                   // output data of each row
                   while ($row = $result->fetch_assoc()) {
-                    echo "<h3>6</h3>";
+                    echo "<h3>" . $row['a'] . "</h3>";
                   }
                 }
 
@@ -192,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 if ($result->num_rows > 0) {
                   // output data of each row
                   while ($row = $result->fetch_assoc()) {
-                    echo "<h3>17</h3>";
+                    echo "<h3>" . $row['a'] . "</h3>";
                   }
                 }
 
@@ -233,9 +233,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>Student ID</th>
                       <th>Full Name</th>
                       <th>Date of Birth</th>
-                      <th>Age</th>
-                      <th>Disability</th>
-                      <th>Class</th>
+                      <th>Gender</th>
+                      <th>Address</th>
+                      <th>Classroom</th>
                       <th>Parent</th>
                       <th>Actions</th>
                     </tr>
@@ -244,52 +244,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                     <?php
-                      $jsonData = file_get_contents("students.json");
-                      $students = json_decode($jsonData, true);
 
-                      foreach ($students as $index => $student) {
+                    $sql = "SELECT * FROM student";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+          
+                      while ($row = $result->fetch_assoc()) {
                         echo "
-                          <tr>
-                            <td>" . ($index + 1) . "</td>
-                            <td>" . $student["fullName"] . "</td>
-                            <td>" . $student["dob"] . "</td>
-                            <td>" . $student["age"] . "</td>
-                            <td>" . $student["disability"] . "</td>
-                            <td>" . $student["studentClass"] . "</td>
-                            <td>" . $student["parentOccupation"] . "</td>
-                            <td>
-                              <button 
-                                type='button' 
-                                class='launchModalBtn' 
-                                data-toggle='modal' 
-                                data-target='#exampleModalCenter' 
-                                data-id='" . ($index + 1) . "'
-                                data-fullname='" . $student["fullName"] . "'
-                                data-dob='" . $student["dob"] . "'
-                                data-age='" . $student["age"] . "'
-                                data-disability='" . $student["disability"] . "'
-                                data-studentclass='" . $student["studentClass"] . "'
-                                data-parentoccupation='" . $student["parentOccupation"] . "'
-                                data-address='" . ($student["address"] ?? '') . "'
-                                data-gender='" . ($student["gender"] ?? '') . "'
-                                data-admissiondate='" . ($student["admissionDate"] ?? '') . "'
-                                data-parentcat='" . ($student["parentCat"] ?? '') . "'
-                                data-image='" . ($student["image"] ?? '') . "'
-                                style='border: none; background: none; padding: 0;'
-                              >
-                                <small class='label bg-orange'>View</small>
-                              </button>
-                            </td>
-                          </tr>
-                        ";
+                      <tr>
+                        <td> " . $row["sid"] . " </td>
+                        <td> " . $row["fname"] . " " . $row["lname"] . " </td>
+                        <td> " . $row["bday"] . "</td>
+                        <td>" . $row["gender"] . "</td>
+                        <td>" . $row["address"] . "</td>
+                        <td>" . $row["classroom"] . "</td>
+                        <td>" . $row["parent"] . "</td>
+                        <td>
+                          
+
+                          <button 
+                            type='button' 
+                            class='launchModalBtn' 
+                            data-toggle='modal' 
+                            data-target='#exampleModalCenter' 
+                            data-sid='" . $row["sid"] . "'
+                            data-fname='" . $row["fname"] . "'
+                            data-lname='" . $row["lname"] . "'
+                            data-bday='" . $row["bday"] . "'
+                            data-gender='" . $row["gender"] . "'
+                            data-address='" . $row["address"] . "'
+                            data-classroom='" . $row["classroom"] . "'
+                            data-parent='" . $row["parent"] . "'
+                            style='border: none; background: none; padding: 0;'
+                          >
+                            <small class='label bg-orange'>View</small>
+                          </button>
+                        </td>
+                      </tr>";
                       }
+                    }
+
+
+
+
                     ?>
-
-
-
-
-
-                  
 
 
                   </tbody>
@@ -373,7 +372,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     if ($result->num_rows > 0) {
                       // output data of each row
                       while ($row = $result->fetch_assoc()) {
-                        echo "<tr><td> " . $row["title"] . " </td><td> " . $row["description"] . "</td></tr>";
+                        echo "<tr><td> " . $row["title"] . " </td><td> " . $row["sid"] . "</td></tr>";
                       }
                     }
 
@@ -428,9 +427,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       // output data of each row
                       while ($row = $result->fetch_assoc()) {
                         echo "<tr>
-                              <td> 40 </td>
+                              <td> 50 </td>
                               <td> 22 </td>
-                              <td> 18 </td>
+                              <td> 28 </td>
                             </tr>";
                       }
                     }
@@ -527,15 +526,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $(document).ready(function () {
               $('.launchModalBtn').on('click', function () {
                 $('#modalSid').text($(this).data('sid'));
-                $('#modalName').text($(this).data('fullname'));
+                $('#modalName').text($(this).data('fname') + ' ' + $(this).data('lname'));
                 $('#modalBday').text($(this).data('bday'));
                 $('#modalGender').text($(this).data('gender'));
                 $('#modalAddress').text($(this).data('address'));
-                $('#modalClassroom').text($(this).data('studentclass'));
-                $('#modalParent').text($(this).data('parentcat'));
-                $('#modalParentOccupation').text($(this).data('parentoccupation'));
-                const imageSrc = $(this).data('image') || 'images/default.jpg';
-                $('#modalImage').attr('src', imageSrc);
+                $('#modalClassroom').text($(this).data('classroom'));
+                $('#modalParent').text($(this).data('parent'));
               });
             });
           </script>
@@ -567,69 +563,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Student Details</h3>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Student Details</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
 
-      <div class="modal-body">
-        <div class="modal-flex" style="display: flex; justify-content: space-between; gap: 20px;">
-          <div class="modal-data">
-            <p class="modal-inner"><strong>ID:</strong> <span id="modalSid"></span></p>
-            <p class="modal-inner"><strong>Name:</strong> <span id="modalName"></span></p>
-            <p class="modal-inner"><strong>Age:</strong> <span id="modalAge"></span></p>
-            <p class="modal-inner"><strong>Birth Date:</strong> <span id="modalBday"></span></p>
-            <p class="modal-inner"><strong>Date of Admission:</strong> <span id="modalAdmissionDate"></span></p>
-            <p class="modal-inner"><strong>Disability:</strong> <span id="modalDisability"></span></p>
-            <p class="modal-inner"><strong>Parent Occupation:</strong> <span id="modalParentOccupation"></span></p>
-            <p class="modal-inner"><strong>Address:</strong> <span id="modalAddress"></span></p>
-            <p class="modal-inner"><strong>Class:</strong> <span id="modalClassroom"></span></p>
-            <p class="modal-inner"><strong>Parent:</strong> <span id="modalParent"></span></p>
-          </div>
-          <div class="modal-image">
-            <img 
-              id="modalImage" 
-              src="images/default.jpg" 
-              alt="student picture" 
-              onerror="this.src='images/default.jpg'" 
-              style="width: 150px; height: auto;" 
-            />
+        <div class="modal-body">
+          <div class="modal-flex">
+            <div class="modal-data">
+              <p class="modal-inner"><strong>ID:</strong> <span id="modalSid"></span></p>
+              <p class="modal-inner"><strong>Name:</strong> <span id="modalName"></span></p>
+              <p class="modal-inner"><strong>Age:</strong> <span id="">12</span></p>
+              <p class="modal-inner"><strong>Birth Date:</strong> <span id="modalBday"></span></p>
+              <p class="modal-inner"><strong>Date of Admission:</strong> <span id="">2022-06-26</span></p>
+              <p class="modal-inner"><strong>Disability:</strong> <span id="">Hearing Impairment</span></p>
+              <p class="modal-inner"><strong>Gender:</strong> <span id="modalGender"></span></p>
+              <p class="modal-inner"><strong>Parent Occupation:</strong> <span id="">N/Qasid</span></p>
+              <p class="modal-inner"><strong>Address:</strong> <span id="modalAddress"></span></p>
+              <p class="modal-inner"><strong>Classroom:</strong> <span id="modalClassroom"></span></p>
+              <p class="modal-inner"><strong>Parent:</strong> <span id="">Serving</span></p>
+            </div>
+            <div class="modal-image">
+              <img src="images/students/Zayna.jpg" alt="student picture" />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".launchModalBtn");
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", function () {
-        document.getElementById("modalSid").innerText = this.dataset.id || "";
-        document.getElementById("modalName").innerText = this.dataset.fullName || "";
-        document.getElementById("modalAge").innerText = this.dataset.age || "";
-        document.getElementById("modalBday").innerText = this.dataset.dob || "";
-        document.getElementById("modalAdmissionDate").innerText = this.dataset.admissiondate || "";
-        document.getElementById("modalDisability").innerText = this.dataset.disability || "";
-        document.getElementById("modalGender").innerText = this.dataset.gender || "";
-        document.getElementById("modalParentOccupation").innerText = this.dataset.parentoccupation || "";
-        document.getElementById("modalAddress").innerText = this.dataset.address || "";
-        document.getElementById("modalClassroom").innerText = this.dataset.studentclass || "";
-        document.getElementById("modalParent").innerText = this.dataset.parentcat || "";
-        document.getElementById("modalImage").src = this.dataset.image || "images/default.jpg";
-      });
-    });
-  });
-</script>
-
-
 
 
   <!-- REQUIRED JS SCRIPTS -->

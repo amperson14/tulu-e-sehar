@@ -197,7 +197,7 @@ x.style.display='block';</script>";
                 <thead>
                 <tr>
                   <th>Attendance ID</th>
-                  <th>Disablities</th>
+                  <th>Teacher</th>
                   <th>Classroom</th>
                   <th>Date</th>
                   <th>Start Time</th>

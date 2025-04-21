@@ -9,20 +9,19 @@ if (!isset($_SESSION['user'])||$_SESSION['role']!='Teacher') {
 ?>
 <?php
 
- $pid =$fname =$lname = $nic=$address = $contact  = $occupation = $gender=$email=" ";
+ $sid =$parentName = $nic=$address = $contact  = $occupation = $gender=$email=" ";
               
 
 if(isset($_GET['update'])){
-  $update = "SELECT * FROM parent WHERE pid=".$_GET['update']."";
+  $update = "SELECT * FROM students WHERE sid=".$_GET['update']."";
   $result = $conn->query($update);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        $pid = $row['pid'];
+        $sid = $row['sid'];
         $nic = $row['nic'];
-                $fname = $row['fname'];
-                $lname = $row['lname'];
+                $parentName = $row['parentName'];
                 $contact = $row['contact'];
 $occupation = $row['job'];
                // $dob = date_format(new DateTime($row['bday']),'m/d/Y');
@@ -134,13 +133,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">First Name</label>
-                  <input name="fname" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Parent First Name" required>
+                  <input name="parentName" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Parent First Name" required>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="exampleInputPassword1">Last Name</label>
                   <input name="lname" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Parent Last Name" required>
-                </div>
+                </div> -->
 
                   <div class="form-group">
                   <label for="exampleInputPassword1">National Identity Card</label>
@@ -190,8 +189,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               if (isset($_POST['submit'])) {
                 $nic = $_POST['nic'];
-                $fname = $_POST['fname'];
-                $lname = $_POST['lname'];
+                $parentName = $_POST['parentName'];
+                
 
                // $dob = date_format(new DateTime($_POST['dob']),'Y-m-d');
                 //echo $dob;
@@ -209,7 +208,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                    
 
-                    $sql = "INSERT INTO Parent (fname,lname,address,gender,job,contact,nic,email) VALUES ( '".$fname."', '".$lname."','".$address."','".$gender."','".$job."','".$contact."','".$nic."','".$email."')";
+                    $sql = "INSERT INTO Parent (parentName,address,gender,job,contact,nic,email) VALUES ( '".$parentName."', '".$address."','".$gender."','".$job."','".$contact."','".$nic."','".$email."')";
 
                   if ($conn->query($sql) === TRUE) {
                          echo "<script type='text/javascript'> var x = document.getElementById('truemsg');
@@ -267,13 +266,13 @@ x.style.display='block';</script>";
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">First Name</label>
-                  <input name="fname" type="text" class="form-control" id="exampleInputPassword1"  required value=<?php echo "'".$fname."'"; ?>>
+                  <input name="parentName" type="text" class="form-control" id="exampleInputPassword1"  required value=<?php echo "'".$parentName."'"; ?>>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="exampleInputPassword1">Last Name</label>
                   <input name="lname" type="text" class="form-control" id="exampleInputPassword1"  required value=<?php echo "'".$lname."'"; ?>>
-                </div>
+                </div> -->
 
                   <div class="form-group">
                   <label for="exampleInputPassword1">National Identity Card</label>
@@ -327,8 +326,7 @@ x.style.display='block';</script>";
 
               if (isset($_POST['submit'])) {
                 $nic = $_POST['nic'];
-                $fname = $_POST['fname'];
-                $lname = $_POST['lname'];
+                $parentName = $_POST['parentName'];
 
                // $dob = date_format(new DateTime($_POST['dob']),'Y-m-d');
                 //echo $dob;
@@ -344,7 +342,7 @@ x.style.display='block';</script>";
                   try {
 
 
-                   $sql = "UPDATE parent SET fname='".$fname."',lname='".$lname."',address='".$address."',gender='".$gender."',job='".$job."',contact='".$contact."',email='".$email."',nic='".$nic."' WHERE pid =".$pid;
+                   $sql = "UPDATE parent SET parentName='".$parentName."',address='".$address."',gender='".$gender."',job='".$job."',contact='".$contact."',email='".$email."',nic='".$nic."' WHERE sid =".$sid;
 
                    // $sql = "INSERT INTO Parent (fname,lname,address,gender,job,contact,nic,email) VALUES ( '".$fname."', '".$lname."','".$address."','".$gender."','".$job."','".$contact."','".$nic."','".$email."')";
 
@@ -391,8 +389,8 @@ x.style.display='block';</script>";
                 <tr>
                   <th>Parent ID</th>
                   <th>Full Name</th>
-                  <th>NIC</th>
-                  <th>Gender</th>
+                  <!-- <th>NIC</th> -->
+                  <!-- <th>Gender</th> -->
                   <th>Address</th>
                   <th>Contact</th>
                   <th>Occupation</th>
@@ -405,13 +403,13 @@ x.style.display='block';</script>";
 
                   <?php
 
-                  $sql = "SELECT * FROM parent";
+                  $sql = "SELECT * FROM students";
                   $result = $conn->query($sql);
 
                   if ($result->num_rows > 0) {
                    // output data of each row
                      while($row = $result->fetch_assoc()) {
-                      echo "<tr><td> " . $row["pid"]. " </td><td> " . $row["fname"]." ". $row["lname"]. " </td><td> " . $row["nic"]. "</td><td>" . $row["gender"]. "</td><td>" . $row["address"]. "</td><td>" . $row["contact"]. "</td><td>" . $row["job"]. "</td><td><a href='parent.php?update=". $row["pid"]."'><small class='label  bg-orange'>Update</small></a></td></tr>";
+                      echo "<tr><td> " . $row["sid"]. " </td><td> " . $row["parentName"] ." </td><td>" . $row["address"]. "</td><td>" . $row["contact"]. "</td><td>" . $row["job"]. "</td><td><a href='parent.php?update=". $row["sid"]."'><small class='label  bg-orange'>Update</small></a></td></tr>";
                        }
                                   }
 

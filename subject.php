@@ -123,14 +123,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                  
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="exampleInputPassword1">Subject ID</label>
                   <input name="sid" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Subject ID" required>
-                </div>
+                </div> -->
 
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Subject Title</label>
-                  <input name="title" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Subject Title" required>
+                  <label for="exampleInputPassword1">Disablity Title</label>
+                  <input name="title" type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Disablity Title" required>
                 </div>
 
                 
@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                 <div class="form-group">
-    <label for="exampleFormControlTextarea1">Syllubus Details</label>
+    <label for="exampleFormControlTextarea1">Details</label>
     <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
   </div>
    
@@ -225,10 +225,10 @@ x.style.display='block';</script>";
 
                  
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="exampleInputPassword1">Subject ID</label>
                   <input name="sid" type="text" class="form-control" id="exampleInputPassword1"  required value=<?php echo "'".$sid."'"; ?> disabled>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label for="exampleInputPassword1">Subject Title</label>
@@ -315,7 +315,7 @@ x.style.display='block';</script>";
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Subject ID</th>
+                  <!-- <th>Subject ID</th> -->
                   <th>Title</th>
                   <th>Details</th>
                   <th>Action</th>
@@ -333,7 +333,7 @@ x.style.display='block';</script>";
                   if ($result->num_rows > 0) {
                    // output data of each row
                      while($row = $result->fetch_assoc()) {
-                      echo "<tr><td> " . $row["sid"]. " </td><td> " . $row["title"]. "</td><td>" . $row["description"]. "</td><td><a href='subject.php?update=". $row["sid"]."'><small class='label  bg-orange'>Update</small></a></td></tr>";
+                      echo "<tr><td> " . $row["title"]. "</td><td>" . $row["description"]. "</td><td><a href='subject.php?update=". $row["sid"]."'><small class='label  bg-orange'>Update</small></a></td></tr>";
                        }
                                   }
 
